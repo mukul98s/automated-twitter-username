@@ -11,19 +11,6 @@ const twitterClient = new Twitter({
 
 const myname = "Mukul Sharma";
 
-const numberMatch = {
-  0: "0️⃣",
-  1: "1️⃣",
-  2: "2️⃣",
-  3: "3️⃣",
-  4: "4️⃣",
-  5: "5️⃣",
-  6: "6️⃣",
-  7: "7️⃣",
-  8: "8️⃣",
-  9: "9️⃣",
-};
-
 module.exports = (req, res) => {
   let httpResponse = res;
   twitterClient
@@ -33,13 +20,8 @@ module.exports = (req, res) => {
         httpResponse.status(500).send("Error fetching Twitter Client");
       }
       const followerCount = res.followers_count;
-      const followerCountString = followerCount.toString().split("");
 
-      const followers = followerCountString.reduce((acc, val) => {
-        return acc + numberMatch[val];
-      }, "");
-
-      const userName = `${myname}|${followers} followers`;
+      const userName = `${myname} and ${followerCount} Others`;
       console.log(userName);
       return userName;
     })
